@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+</head>
+<body>
+     <div>
+          <ol id="ol">
+
+          </ol>
+     </div>
+    <script>
+     var isLogin=true;
+     fetch("http://localhost:8080/session").then(response=>response.json()).then(data=>{
+          if(data.error){
+               alert("Bạn chưa login");
+          }
+          else{
+               if(data.role=='admin'){
+                    fetch("http://localhost:8080/task").then(res=>res.json()).then(value=>{
+                         var i = 0 ;
+                         value.forEach(element => {
+                              i++;
+                              var text="<li><h2>"+element.task+"</h2><ul>";
+                              element['user'].forEach(vas=>{
+                                   text+="<li>"+vas.username+`<button onclick="Delete(`+i+`,'`+vas.username+`')"">Xoá</button></li>`;
+                              })
+                              text+="</ul></li>"
+                              document.getElementById("ol").innerHTML+=text+"<input placeholder='Thêm người dùng' id='input"+i+"'><button onclick='add("+i+")'>Thêm</button>";
+                              
+                         });
+                    })
+               }
+               if(data.role=='manager'){
+                    fetch("http://localhost:8080/task").then(res=>res.json()).then(value=>{
+                         var i = 0 ;
+                         value.forEach(element => {
+                              i++;
+                              var text="<li><h2>"+element.task+"</h2><ul>";
+                              element['user'].forEach(vas=>{
+                                   if(vas.permision=='all')text+="<li>"+vas.username+`<button onclick="Delete(`+i+`,'`+vas.username+`')"">Xoá</button></li>`;
+                              })
+                              text+="</ul></li>"
+                              document.getElementById("ol").innerHTML+=text+"<input placeholder='Thêm người dùng' id='input"+i+"'><button onclick='add("+i+")'>Thêm</button>";
+                              
+                         });
+                    }) 
+               }
+          }
+     })
+     
+     
+
+     function add(task){
+          var input=document.getElementById("input"+task).value;
+          if(input!=""){
+               const xhr = new XMLHttpRequest();
+               xhr.open("GET", "http://localhost:8080/task?task="+task+"&addUser="+input, true);
+               xhr.send();
+               alert("thêm thành công")
+               location.reload()
+          }
+          else alert("Input ko được để trống");
+     }
+     function Delete(task,username){
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "http://localhost:8080/task?task="+task+"&DeleteUser="+username, true);
+          xhr.send();
+          alert("thêm thành công")
+          location.reload()
+     }
+
+    </script> 
+</body>
+</html>
