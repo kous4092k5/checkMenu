@@ -1,0 +1,78 @@
+[{
+  "_id": {
+    "$oid": "65150be4447e5b1b3203080d"
+  },
+  "task": "Quản lí doanh thu",
+  "user": [
+    {
+      "username": "kous1608",
+      "permission": "all",
+      "_id": {
+        "$oid": "6514f69e1bb8da91a0acaa02"
+      }
+    },
+    {
+      "username": "fd",
+      "permission": "manager",
+      "_id": {
+        "$oid": "65150be4447e5b1b3203080c"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65150be9447e5b1b32030823"
+  },
+  "task": "Thêm xoá bài đăng",
+  "user": [
+    {
+      "username": "kous1608",
+      "permission": "all",
+      "_id": {
+        "$oid": "6514f6a01bb8da91a0acaa0c"
+      }
+    },
+    {
+      "username": "truong",
+      "permission": "all",
+      "_id": {
+        "$oid": "65150be9447e5b1b32030822"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "651574d516352339c6684850"
+  },
+  "task": "Người dùng được vào menu1",
+  "user": [
+    {
+      "username": "tn16204646@gmail.com",
+      "permission": "all",
+      "_id": {
+        "$oid": "651574d516352339c668484f"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65157ecdd39d23d4f9846bbe"
+  },
+  "task": "Người dùng được vào menu2",
+  "user": [
+    {
+      "username": "1",
+      "permission": "all",
+      "_id": {
+        "$oid": "65157ecdd39d23d4f9846bbd"
+      }
+    }
+  ],
+  "__v": 0
+}]
