@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .item{
+               display: grid;
+               grid-template-columns: repeat(17,1fr);
+          }
+          .item div{
+               border: 1px #ccc solid;
+          }
+     </style>
+</head>
+<body>
+     <div>
+          <input type="search" name="" id="searchInput" onchange="search()" placeholder="tìm kiếm...">
+     </div>
+     <div>
+        <span id="productDetail" style="display: grid;grid-template-columns: 1fr;">
+          <nav class='items' style="display: grid;
+          grid-template-columns: repeat(17,1fr);">
+               <div>MÃ BU</div>
+               <div>SỐ QUẢN LÍ</div>
+               <div>HM QUẢN LÍ</div>
+               <div>TÊN Đồ</div>
+               <div>Vị trí cần quản lí</div>
+               <div>Kích thước đồ gá</div>
+               <div>Min</div>
+               <div>max</div>
+               <div>Công dụng</div>
+               <div>Dụng cụ đo</div>
+               <div>Đv nhỏ nhất</div>
+               <div>Bộ phận đo</div>
+               <div>Theo sản lượng</div>
+               <div>Theo thời gian</div>
+               <div>Loại hình...</div>
+               <div>Mức cảnh báo</div>
+               <div>Mã sản phẩm</div>
+<br>
+
+
+
+
+
+
+          </nav>
+        </span>  
+     </div>
+     <script>
+          fetch("http://localhost:8080/excel").then(res=>res.json()).then(data=>{
+               data.forEach(value => {
+               document.getElementById("productDetail").innerHTML+=`<nav class='item'><div>`+value['__EMPTY']+`</div><div>`+value['__EMPTY_1']+`</div><div>`+value['__EMPTY_3']+`</div><div>`+value['__EMPTY_5']+`</div><div>`+value['__EMPTY_6']+`</div><div>`+value['__EMPTY_7']+`</div><div>`+value['__EMPTY_8']+`</div><div>`+value['__EMPTY_9']+`</div><div>`+value['__EMPTY_10']+`</div><div>`+value['__EMPTY_11']+`</div><div>`+value['__EMPTY_12']+`</div><div>`+value['__EMPTY_13']+`</div><div>`+value['__EMPTY_14']+`</div><div>`+value['__EMPTY_15']+`</div><div>`+value['__EMPTY_17']+`</div><div>`+value['__EMPTY_29']+`</div><div>`+value['__EMPTY_30']+`</div></nav>`;
+
+               });
+
+          })
+          function search(){
+               const searchInput = document.getElementById('searchInput').value;
+               var item=document.getElementsByClassName('item');
+var text=""
+               for(let i = 0 ; i<item.length;i++){
+                    if(item[i].innerHTML.search(searchInput)== -1){
+                         item[i].style.display="none"
+                    }
+                    else{
+                         item[i].style.display="grid"
+                    }
+               }
+
+
+
+
+          }
+     </script>
+</body>
+</html>

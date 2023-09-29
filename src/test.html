@@ -6,11 +6,19 @@
      <title>Document</title>
 </head>
 <body>
-     <div>
+     <div id="menu" style="height: 50px;border-bottom:1px #ccc solid;align-items: center;text-align: center;">
+
+     </div>
+
+     <div style="border-bottom:1px #ccc solid;margin-bottom: 10px;">
           <ol id="ol">
 
           </ol>
      </div>
+     <form action="/upload" method="post">
+          <input type="file" name="excelFile" enctype="multipart/form-data" id="">
+          <button type="submit">Gửi</button>
+     </form>
     <script>
      var isLogin=true;
      fetch("http://localhost:8080/session").then(response=>response.json()).then(data=>{
@@ -29,18 +37,18 @@
                               })
                               text+="</ul></li>"
                               document.getElementById("ol").innerHTML+=text+"<input placeholder='Thêm người dùng' id='input"+i+"'><button onclick='add("+i+")'>Thêm</button>";
-                              
                          });
                     })
                }
                if(data.role=='manager'){
+                    
                     fetch("http://localhost:8080/task").then(res=>res.json()).then(value=>{
                          var i = 0 ;
                          value.forEach(element => {
                               i++;
                               var text="<li><h2>"+element.task+"</h2><ul>";
                               element['user'].forEach(vas=>{
-                                   if(vas.permision=='all')text+="<li>"+vas.username+`<button onclick="Delete(`+i+`,'`+vas.username+`')"">Xoá</button></li>`;
+                                   if(vas.permission=='all')text+="<li>"+vas.username+`<button onclick="Delete(`+i+`,'`+vas.username+`')"">Xoá</button></li>`;
                               })
                               text+="</ul></li>"
                               document.getElementById("ol").innerHTML+=text+"<input placeholder='Thêm người dùng' id='input"+i+"'><button onclick='add("+i+")'>Thêm</button>";
@@ -48,6 +56,10 @@
                          });
                     }) 
                }
+               //thêm user vào menu
+               fetch("http://localhost:8080/menu?email="+data.email).then(res=>res.json()).then(value=>{
+                    document.getElementById("menu").innerHTML=value.html;   
+               })
           }
      })
      
